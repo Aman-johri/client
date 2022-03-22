@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     font-family: "Josefin Sans",sans-serif;
+    background-color: white;
 }
 
 .topLeft{
@@ -32,7 +33,7 @@
 }
 
 .topIcon{
-    font-size: 20px;
+    font-size: 30px;
     margin-right: 10px;
     color: #444;
     cursor: pointer;
@@ -69,5 +70,6 @@
 }
 
 .linkTo:hover{
-    background-color: white;
+    color: aqua;
+    text-decoration: underline;
 }

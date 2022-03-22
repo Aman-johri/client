@@ -6,15 +6,17 @@ import Write from '../src/Pages/Write/Write';
 import Home from "../src/Pages/home/Home";
 import Posts from './Components/posts/Posts';
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {  BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SinglePost from './Components/singlePost/SinglePost';
+
 
 function App() {
   return (
     <Router>
       <Topbar />
       <Routes>
-        <Route path="/Home" element={<Home />} />
-        <Route path="/single" element={<Single />}/>
+        <Route path="/Home" element={<Home/>} />
+        <Route path="/Single/:postId" element={<Single/>} />
         <Route path="/write" element={<Write />}/>
       </Routes>
     </Router>
@@ -22,3 +24,9 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+

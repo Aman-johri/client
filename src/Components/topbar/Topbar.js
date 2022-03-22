@@ -15,8 +15,7 @@ class Topbar extends React.Component {
                         <li className="topListItem"><Link className="linkTo" to="/Home">HOME</Link></li>
                         <li className="topListItem"><Link className="linkTo" to="/">ABOUT</Link></li>
                         <li className="topListItem"><Link className="linkTo" to="/">CONTACT</Link></li>
-                        <li className="topListItem"><Link className="linkTo" to="/Write">WRITE</Link></li>
-                        <li className="topListItem"><Link className="linkTo" to="/">LOGOUT</Link></li>            
+                        <li className="topListItem"><Link className="linkTo" to="/Write">POST</Link></li>      
                     </ul>
                 </div>
                 <div className="topRight">
