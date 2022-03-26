@@ -56,8 +56,6 @@ class SinglePost extends React.Component {
             src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
-          {
-            this.state.update ?<input type="text" value={this.state.post.title} className="singlePostTitleInput" onChange={(e)=>this.setState({post:{...this.state.post,title:e.target.value}})}/>:
             <h1 className='singlePostTitle'>
             {this.state.post.title}
             <div className='singlePostEdit'>
