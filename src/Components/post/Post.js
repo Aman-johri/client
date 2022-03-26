@@ -10,7 +10,6 @@ export default class Post extends React.Component {
         this.state = {
             post: this.props.post
         };
-
     }
     
     render(){
@@ -22,12 +21,9 @@ export default class Post extends React.Component {
                     <div className="postCats">
                         <span className="postCat">{this.state.post.categories}</span>
                     </div>
-                    <Link to={`/single/${this.state.post._id}`}>
+                    <a href={`/single/${this.state.post._id}`}>
                     <span className="postTitle">{this.state.post.title}</span>
-                    </Link>
-                    {/* <a href={`/single/${this.state.post._id}`}>
-                    <span className="postTitle">{this.state.post.title}</span>
-                    </a> */}
+                    </a>
                     <hr/>
                     <span className="postDate">{new Date(this.state.post.createdAt).toDateString()}</span>
                 </div>
@@ -37,8 +33,3 @@ export default class Post extends React.Component {
     }
 }
 
-
-  
-  
-  
-  

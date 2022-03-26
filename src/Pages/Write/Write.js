@@ -1,22 +1,39 @@
 import "./write.css";
 import React from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import {createData } from "../../redux/actions/PostActions";
 
-export default class Write extends React.Component {
+class Write extends React.Component {
 
-  //....................add new post by class based component and use axios to post to server................
-  handleClick = async e => {
-    e.preventDefault();
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      desc: "",
+    };
+    this.handleTextChange = this.handleTextChange.bind(this);
+  }
+  
+  handleTextChange = e => {
     const title = document.getElementById("title").value;
     const desc = document.getElementById("desc").value;
-    const res = await axios.post("http://localhost:5000/posts", {
-      title: title,
-      desc: desc
+    this.setState({
+      title:title,
+      desc:desc
     });
-    console.log(res);
+  }
+
+  handleClick = e => {
+    e.preventDefault();
+    const post = {
+      title: this.state.title,
+      desc: this.state.desc,
+    };
+    this.props.createData(post);
     window.location.href = "/Home";
     window.alert("Congratulation! your post has been published...");
-  };
+  }
 
   
   
@@ -40,6 +57,7 @@ export default class Write extends React.Component {
               type="text"
               autoFocus={true}
               id="title"
+              onChange={this.handleTextChange}
             />
           </div>
           <div className="writeFormGroup">
@@ -49,6 +67,7 @@ export default class Write extends React.Component {
               type="text"
               autoFocus={true}
               id="desc"
+              onChange={this.handleTextChange}
             />
           </div>
           <button className="writeSubmit" type="submit" >
@@ -60,4 +79,14 @@ export default class Write extends React.Component {
   }
 
   }
+
+const mapDispatchToprops = dispatch => {
+  return {
+    createData: (data) => dispatch(createData(data))
+  };
+}
+
+
+
+export default connect(null , mapDispatchToprops)(Write);
   

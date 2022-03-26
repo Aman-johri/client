@@ -2,12 +2,13 @@ import React from 'react'
 import "./posts.css"
 import Post from '../post/Post'
 import {connect} from 'react-redux'
-import {fetchData} from '../../redux/actions/postActions'
+import {fetchData} from '../../redux/actions/PostActions'
 
 class Posts extends React.Component {
 
   componentDidMount(){
     this.props.onFetchData();
+    console.log(this.props.data);
   }
 
   render(){
@@ -22,7 +23,7 @@ class Posts extends React.Component {
 }
 
 const mapStatetoProps = (state) => {
-  return { data: state.data, error: state.error };
+  return { data:state.data, error: state.error };
 }
 
 const mapDispatchprops = (dispatch) => {
@@ -31,7 +32,4 @@ const mapDispatchprops = (dispatch) => {
 
 
 export default connect(mapStatetoProps, mapDispatchprops)(Posts);
-
-
-
 

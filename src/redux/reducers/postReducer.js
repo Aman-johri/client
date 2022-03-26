@@ -1,4 +1,4 @@
-import { fetchData } from "../actions/postActions"
+import { fetchData } from "../actions/PostActions"
 
 const intialState = {
     data: [],
@@ -10,8 +10,15 @@ const reducer = (state = intialState, action) => {
     switch (action.type) {
         case "FetchData":
             return { ...state, data: action.data }
-        case "FetchDataById":
-            return { ...state, data: action.data }
+        case "GETDATA":
+            console.log(action.data)
+            return {...state, data: action.data }
+        case "DELETE":
+            return { ...state}
+        case "CREATE":
+            return { ...state}
+        case "UPDATE":
+            return { ...state}
         case "ERROR":
             return { ...state, error: action.msg }
         default:
