@@ -8,22 +8,22 @@ class Posts extends React.Component {
 
   componentDidMount(){
     this.props.onFetchData();
-    console.log(this.props.data);
   }
-
+  
   render(){
     return (
       <div className='posts'>
-        {this.props.data.map(post => (
+        {this.props.isloading ? this.props.data.map(post => (
           <Post key={post._id} post={post} />
-        ))}
-        </div>
+        )): <h2 className='error'>Sorry! unable to show blogs this time.<br/>*This is due to network problem,Refresh this page again or check your internet connection*</h2>}
+      </div>
     );
   }
 }
 
 const mapStatetoProps = (state) => {
-  return { data:state.data, error: state.error };
+  console.log(state)
+  return { data:state.data, error: state.error , isloading: state.isloading  };
 }
 
 const mapDispatchprops = (dispatch) => {

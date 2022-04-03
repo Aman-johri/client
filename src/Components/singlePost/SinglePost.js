@@ -8,18 +8,21 @@ class SinglePost extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-     post:this.props.Postdata,
-     update:false
+      title: "",
+      desc:"",
+      update: false
+    }
   }
-  this.handleClick = this.handleClick.bind(this);
-  this.handleClickUpdate = this.handleClickUpdate.bind(this);
-}
 
   handleClick = e => {
     e.preventDefault();
-    this.setState({
-      update:true
-    });
+    this.props.Postdata.map(post => (
+      this.setState({
+         title:post.title,
+         desc:post.desc,
+         update:true
+      })
+   ))
   }
 
   handleClickUpdate = e => {
@@ -31,11 +34,9 @@ class SinglePost extends React.Component {
     };
     console.log(post);
     this.props.updateData(postId,post);
-    window.alert("Congratulation! your post has been updated...");
     window.location.reload();
   }
-
-
+  
   componentDidMount(){
     const postId = window.location.href.split("/")[4];
     this.props.getData(postId);
@@ -53,7 +54,7 @@ class SinglePost extends React.Component {
               alt=""
             />
             { this.state.update ? <input type="text" id='title' 
-             className="singlePostTitleInput" placeholder={post.title} value={this.props.Postdata.title} onChange={(e) => this.setState({title:e.target.value})}/> :
+             className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({...this.state,title:e.target.value})}/> :
               <h1 className='singlePostTitle'>
                 {post.title}
               <div className='singlePostEdit'>
@@ -67,7 +68,7 @@ class SinglePost extends React.Component {
                 <span className='singlePostDate'>{new Date(post.createdAt).toDateString()}</span>
             </div>
             {
-              this.state.update ? <textarea className="singlePostDescInput" id="desc" placeholder={post.desc} onChange={(e) => this.setState({desc:e.target.value})}></textarea> :
+              this.state.update ? <textarea className="singlePostDescInput" id="desc" placeholder={post.desc} value={this.state.desc} onChange={(e) => this.setState({...this.state, desc:e.target.value})}></textarea> :
               <p className='singlePostDesc'>
               {post.desc}
               </p>
@@ -82,10 +83,7 @@ class SinglePost extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
-  console.log(state.data);
   return {Postdata: state.data}
-
 }
 
 const mapDispatchToProps = (dispatch) => {

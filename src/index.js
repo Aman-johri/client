@@ -14,22 +14,22 @@ import { PersistGate } from 'redux-persist/integration/react';
 import reducer from './redux/reducers/PostReducer';
 const middleware = [thunk];
 
-const persistConfig = {
-  key: 'root',
-  storage,
-}
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+// }
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 
-const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware)));
 
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
-     <PersistGate loading={null} persistor={persistor}> 
+     {/* <PersistGate loading={null} persistor={persistor}>  */}
     <App />
-    </PersistGate>
+    {/* </PersistGate> */}
   </Provider>,
   document.getElementById('root')
 );

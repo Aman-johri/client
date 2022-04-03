@@ -11,16 +11,19 @@ class Write extends React.Component {
     this.state = {
       title: "",
       desc: "",
+      categories: "",
     };
-    this.handleTextChange = this.handleTextChange.bind(this);
   }
   
-  handleTextChange = e => {
+  handleTextChange = (e) => {
+    e.preventDefault();
     const title = document.getElementById("title").value;
     const desc = document.getElementById("desc").value;
+    const categories = document.getElementById("category").value;
     this.setState({
       title:title,
-      desc:desc
+      desc:desc,
+      categories:categories
     });
   }
 
@@ -29,14 +32,25 @@ class Write extends React.Component {
     const post = {
       title: this.state.title,
       desc: this.state.desc,
+      categories:this.state.categories
     };
     this.props.createData(post);
     window.location.href = "/Home";
     window.alert("Congratulation! your post has been published...");
   }
-
   
-  
+   handleEmpty = e => {
+     e.preventDefault();
+     const title = document.getElementById("title").value;
+     const desc = document.getElementById("desc").value;
+     const category = document.getElementById("category").value;
+     if (title && (desc && category)) {
+       document.getElementById("btn").disabled = false;
+      } 
+     else {
+       document.getElementById("btn").disabled = true;
+      }
+    }
   render(){
     return (
       <div className="write">
@@ -47,30 +61,40 @@ class Write extends React.Component {
         />
         <form className="writeForm" onSubmit={this.handleClick}>
           <div className="writeFormGroup">
-            <label htmlFor="fileInput">
+            {/* <label htmlFor="fileInput">
               <i className="writeIcon fa fa-plus"></i>
-            </label>
-            <input id="fileInput" type="file" style={{ display: "none" }} />
+            </label> */}
+            {/* <input id="fileInput" type="file" style={{ display: "none" }} /> */}
             <input
-              className="writeInput"
-              placeholder="Title"
+              className="writeInput1"
+              placeholder="Title..."
               type="text"
-              autoFocus={true}
               id="title"
+              onKeyUp={this.handleEmpty}
               onChange={this.handleTextChange}
             />
+            <input
+             className="category"
+             placeholder="Category..."
+             type="text"
+             id="category"
+             onKeyup={this.handleEmpty}
+             onChange={this.handleTextChange}
+             />
+
+
           </div>
           <div className="writeFormGroup">
             <textarea
-              className="writeInput writeText"
+              className="writeInput2 writeText"
               placeholder="Tell your story..."
               type="text"
-              autoFocus={true}
               id="desc"
+              onKeyUp={this.handleEmpty}
               onChange={this.handleTextChange}
             />
           </div>
-          <button className="writeSubmit" type="submit" >
+          <button className="writeSubmit" type="submit" disabled id="btn">
             Publish
           </button>
         </form>

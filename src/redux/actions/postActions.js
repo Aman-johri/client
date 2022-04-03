@@ -83,7 +83,7 @@ export const updateData = (postId,post) => {
                     type: "UPDATE",
                     data: response.data,
                 })
-            })
+            },window.alert("Congratulation! your post has been updated..."))
             .catch(err => {
                 dispatch({ 
                     type: "ERROR",

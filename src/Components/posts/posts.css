@@ -3,4 +3,14 @@
     display: flex;
     flex-wrap: wrap;
     margin: 20px;
+    height: 40%;
+}
+.error{
+     border: 2px solid black;
+     text-align: center;
+     justify-items: center;
+     align-items: center;
+     margin-top: 140px;
+     margin-left: 80px;
+     height: 130px;
 }

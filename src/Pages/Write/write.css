@@ -1,5 +1,5 @@
 .write {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .writeImg {
@@ -33,33 +33,53 @@
   cursor: pointer;
 }
 
-.writeInput {
+.category{
+  margin-top: 20px;
   font-size: 30px;
-  border: none;
+  margin-bottom: 40;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 24%;
+  margin-left: 10px;
+}
+
+.writeInput1 {
+  margin-top: 20px;
+  font-size: 30px;
+  margin-bottom: 20;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.writeInput2 {
+  margin-top: 20px;
+  font-size: 30px;
   padding: 20px;
-  width: 70vw;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 75%;
 }
 
 .writeInput::placeholder {
-  color: rgb(189, 185, 185);
-  font-weight: 400;
+  color: rgb(129, 125, 125);
+  font-weight: 300;
 }
 
-.writeInput:focus {
-  outline-style: none;
-}
+
 
 .writeText {
-  width: 70vw;
-  height: 100vh;
+  height: 10vh;
   font-family: inherit;
   font-size: 20px;
 }
 
 .writeSubmit {
   position: absolute;
-  top: 20px;
-  right: 50px;
+  top: 200px;
+  right: 50%;
   color: white;
   background-color: teal;
   padding: 10px;
@@ -69,4 +89,9 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin-top: 30px;
+}
+
+.writeSubmit:disabled{
+  background-color: rgb(129, 125, 125);
 }
