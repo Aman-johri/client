@@ -1,8 +1,8 @@
 import React from 'react'
 import "./posts.css"
-import Post from '../post/Post'
 import {connect} from 'react-redux'
-import {fetchData} from '../../redux/actions/PostActions'
+import {fetchData} from '../../redux/actions/postActions'
+import CardPost from '../cardData/CardPost'
 
 class Posts extends React.Component {
 
@@ -13,8 +13,8 @@ class Posts extends React.Component {
   render(){
     return (
       <div className='posts'>
-        {this.props.isloading ? this.props.data.map(post => (
-          <Post key={post._id} post={post} />
+        {this.props.isLoading ? this.props.data.map(post => (
+          <CardPost key={post._id} post={post} />
         )): <h2 className='error'>Sorry! unable to show blogs this time.<br/>*This is due to network problem,Refresh this page again or check your internet connection*</h2>}
       </div>
     );
@@ -23,7 +23,7 @@ class Posts extends React.Component {
 
 const mapStatetoProps = (state) => {
   console.log(state)
-  return { data:state.data, error: state.error , isloading: state.isloading  };
+  return { data:state.data, error: state.error , isLoading: state.isLoading  };
 }
 
 const mapDispatchprops = (dispatch) => {
@@ -32,4 +32,5 @@ const mapDispatchprops = (dispatch) => {
 
 
 export default connect(mapStatetoProps, mapDispatchprops)(Posts);
+
 

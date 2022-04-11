@@ -1,18 +1,25 @@
-import { fetchData } from "../actions/PostActions"
+import { fetchData } from "../actions/postActions"
 
-const intialState = {
+const initialState = {
     data: [],
     error: "",
-    isloading: false
+    isLoading: false,
+    singleData:[],
+    dataObject : {}
 }
 
-const reducer = (state = intialState, action) => {
-
+const reducer = (state =initialState, action) => {
+    
     switch (action.type) {
         case "FetchData":
-            return { ...state, data: action.data, isloading: true}
+            const obj = {};
+            action.data.forEach(element => {
+                obj[element._id] = element;
+            })
+            console.log("fetch",obj);
+            return { ...state, data: action.data, isLoading: true , dataObject: obj};
         case "GETDATA":
-            return {...state, data: action.data , isloading: true}
+            return {...state, singleData: action.data , isLoading: true}
         case "DELETE":
             return { ...state}
         case "CREATE":
@@ -24,6 +31,5 @@ const reducer = (state = intialState, action) => {
         default:
             return state
     }
-
 }
 export default reducer;

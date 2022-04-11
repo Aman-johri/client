@@ -19,19 +19,25 @@
     text-align: center;
     margin: 10px;
     font-family: 'Lora', serif;
-    font-size: 20px;
+    font-size: 30px;
+}
+
+.postTitle{
+    color: blue;
+    text-decoration: underline;
 }
 
 .singlePostEdit{
     float: right;
     font-size: 25px;
+    display: flex;
+    flex-direction: row;
 }
 
 .singlePostIcon{
-    margin-left: 10px;
+    margin-right: 10px;
     cursor: pointer;
 }
-
 .singlePostIcon:last-child{
     color: tomato;
 }
@@ -45,7 +51,7 @@
 }
 
 .singlePostDesc{
-    font-size: 15px;
+    font-size: 20px;
     text-align: justify;
     line-height: 40px;
 }

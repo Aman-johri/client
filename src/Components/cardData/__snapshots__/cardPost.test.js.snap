@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing CardPost component snapshot test 1`] = `
+"<div className=\\"post\\">
+  <img className=\\"posting\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940\\" />
+  <div className=\\"postInfo\\">
+    <div className=\\"postCats\\">
+      <span className=\\"postCat\\">
+        Tech
+      </span>
+    </div>
+    <Link to=\\"/single/undefined\\">
+      <span className=\\"postTitle\\">
+        Aman Johri
+      </span>
+    </Link>
+    <hr />
+    <span className=\\"postDate\\">
+      Sat Apr 02 2022
+    </span>
+  </div>
+</div>"
+`;

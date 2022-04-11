@@ -8,6 +8,7 @@
     align-items: center;
     font-family: "Josefin Sans",sans-serif;
     background-color: white;
+    z-index: 1;
 }
 
 .topLeft{

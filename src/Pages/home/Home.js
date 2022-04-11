@@ -1,7 +1,7 @@
 
 import Header from "../../Components/header/Header";
 import Sidebar from "../../Components/sidebar/Sidebar";
-import Posts from "../../Components/posts/Posts";
+import Posts from "../../Components/postData/Posts";
 import "./home.css"
 import React from "react";
 

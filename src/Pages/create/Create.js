@@ -1,10 +1,10 @@
-import "./write.css";
+import "./create.css";
 import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import {createData } from "../../redux/actions/PostActions";
+import PropTypes from 'prop-types';
 
-class Write extends React.Component {
+class Create extends React.Component {
 
   constructor(props) {
     super(props);
@@ -94,6 +94,7 @@ class Write extends React.Component {
               onChange={this.handleTextChange}
             />
           </div>
+          <h4 style={{marginLeft:150}}>*To enable Publish button provide all the fields value correctly</h4>
           <button className="writeSubmit" type="submit" disabled id="btn">
             Publish
           </button>
@@ -104,13 +105,19 @@ class Write extends React.Component {
 
   }
 
-const mapDispatchToprops = dispatch => {
-  return {
-    createData: (data) => dispatch(createData(data))
-  };
+// const mapDispatchToprops = dispatch => {
+//   return {
+//     createData: (data) => dispatch(createData(data))
+//   };
+// }
+
+Create.propTypes = {
+  createData: PropTypes.func.isRequired
 }
 
+Create.defaultProps = {
+  createData: () => {}
+}
 
-
-export default connect(null , mapDispatchToprops)(Write);
+export default Create;
   

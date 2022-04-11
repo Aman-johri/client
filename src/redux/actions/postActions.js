@@ -3,6 +3,7 @@ export const fetchData = () => {
     return (dispatch) => {
         axios.get('http://localhost:5000/posts')
             .then(response => {
+                console.log(response.data);
                 dispatch({
                     type: "FetchData",
                     data: response.data
@@ -57,6 +58,7 @@ export const getData = (postId) => {
 
 
 export const createData = (post) => {
+    console.log("create data",post);
     return (dispatch) => {
         axios.post('http://localhost:5000/posts',post)
             .then(response => {

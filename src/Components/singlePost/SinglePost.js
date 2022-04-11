@@ -2,7 +2,8 @@ import React from 'react'
 import "./singlePost.css";
 import axios from 'axios'
 import { connect } from 'react-redux';
-import {deleteData, getData , updateData} from '../../redux/actions/PostActions'
+import {deleteData, getData , updateData} from '../../redux/actions/postActions'
+import PropTypes from 'prop-types';
 
 class SinglePost extends React.Component {
   constructor(props){
@@ -14,8 +15,7 @@ class SinglePost extends React.Component {
     }
   }
 
-  handleClick = e => {
-    e.preventDefault();
+  handleClick = () => {
     this.props.Postdata.map(post => (
       this.setState({
          title:post.title,
@@ -25,12 +25,11 @@ class SinglePost extends React.Component {
    ))
   }
 
-  handleClickUpdate = e => {
-    e.preventDefault();
+  handleClickUpdate = () => {
     const postId = window.location.href.split("/")[4];
     const post = {
       title: this.state.title,
-      desc: this.state.desc,
+      desc: this.state.desc
     };
     console.log(post);
     this.props.updateData(postId,post);
@@ -43,6 +42,7 @@ class SinglePost extends React.Component {
   }
   
    render(){
+     console.log("aman",this.props.Postdata);
     return (
       <div className='singlePost'>
         {
@@ -53,13 +53,12 @@ class SinglePost extends React.Component {
               src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               alt=""
             />
-            { this.state.update ? <input type="text" id='title' 
-             className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({...this.state,title:e.target.value})}/> :
+            { this.state.update ? <input type="text" id="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({...this.state,title:e.target.value})}/> :
               <h1 className='singlePostTitle'>
                 {post.title}
               <div className='singlePostEdit'>
-              <i className='singlePostIcon fa fa-edit' onClick={this. handleClick} ></i>
-              <i className='singlePostIcon fa fa-trash' onClick={deleteData(post._id)}></i>
+              <i className='singlePostIcon fa fa-edit' id='edit' onClick={this. handleClick} ></i>
+              <i className='singlePostIcon fa fa-trash' id='delete' onClick={deleteData(post._id)}></i>
               </div>
               </h1>
             }
@@ -73,7 +72,7 @@ class SinglePost extends React.Component {
               {post.desc}
               </p>
             }
-            <button className='singlePostBtn' onClick={this.handleClickUpdate} >Update</button>
+            <button className='singlePostBtn' hidden onClick={this.handleClickUpdate} id="updatebtn" >Update</button>
             </div>
             ))
           }
@@ -82,18 +81,19 @@ class SinglePost extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {Postdata: state.data}
+
+SinglePost.propTypes = {
+  Postdata: PropTypes.object.isRequired,
+  deleteData: PropTypes.func.isRequired,
+  getData: PropTypes.func.isRequired,
+  updateData: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-     deleteData: (postId) => dispatch(deleteData(postId)),
-     getData: (postId) => dispatch(getData(postId)),
-     updateData: (postId, post) => dispatch(updateData(postId, post))
-
-  }
+SinglePost.defaultProps = {
+  deleteData: () => {},
+  getData: () => {},
+  updateData: () => {}
 }
 
+export default SinglePost;
 
-export default connect(mapStateToProps,mapDispatchToProps)(SinglePost);
