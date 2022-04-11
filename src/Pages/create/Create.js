@@ -12,18 +12,23 @@ class Create extends React.Component {
       title: "",
       desc: "",
       categories: "",
+      isButtonDisabled : true
     };
+    this.handleTextChange = this.handleTextChange.bind(this);
   }
   
-  handleTextChange = () => {
-    const title = document.getElementById("title").value;
-    const desc = document.getElementById("desc").value;
-    const categories = document.getElementById("category").value;
-    this.setState({
-      title:title,
-      desc:desc,
-      categories:categories
-    });
+  handleTextChange(e){
+    this.setState({ [e.target.name] : e.target.value});
+    // if((this.state.title && this.state.desc && this.state.categories)){
+    //   this.setState({
+    //     isButtonDisabled:false
+    //   })
+    // }
+    // else{
+    //   this.setState({
+    //     isButtonDisabled:true
+    //   })
+    // }
   }
 
   handleClick = () => {
@@ -36,19 +41,9 @@ class Create extends React.Component {
     window.location.href = "/Home";
     window.alert("Congratulation! your post has been published...");
   }
-  
-   handleEmpty = () => {
-     const title = document.getElementById("title").value;
-     const desc = document.getElementById("desc").value;
-     const category = document.getElementById("category").value;
-     if (title && (desc && category)) {
-       document.getElementById("btn").disabled = false;
-      } 
-     else {
-       document.getElementById("btn").disabled = true;
-      }
-    }
   render(){
+
+    const {title,desc,categories,isButtonDisabled} = this.state;
     return (
       <div className="write">
         <img
@@ -56,7 +51,7 @@ class Create extends React.Component {
           src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt=""
         />
-        <form className="writeForm" onSubmit={this.handleClick}>
+        <form className="writeForm">
           <div className="writeFormGroup">
             {/* <label htmlFor="fileInput">
               <i className="writeIcon fa fa-plus"></i>
@@ -67,7 +62,8 @@ class Create extends React.Component {
               placeholder="Title..."
               type="text"
               id="title"
-              onKeyUp={this.handleEmpty}
+              name="title"
+              // onKeyUp={this.handleEmpty}
               onChange={this.handleTextChange}
             />
             <input
@@ -75,7 +71,8 @@ class Create extends React.Component {
              placeholder="Category..."
              type="text"
              id="category"
-             onKeyup={this.handleEmpty}
+             name="categories"
+            //  onKeyup={this.handleEmpty}
              onChange={this.handleTextChange}
              />
 
@@ -87,12 +84,13 @@ class Create extends React.Component {
               placeholder="Tell your story..."
               type="text"
               id="desc"
-              onKeyUp={this.handleEmpty}
+              name="desc"
+              // onKeyUp={this.handleEmpty}
               onChange={this.handleTextChange}
             />
           </div>
           <h4 style={{marginLeft:150}}>*To enable Publish button provide all the fields value correctly</h4>
-          <button className="writeSubmit" type="submit" disabled id="btn">
+          <button className="writeSubmit"  onClick={(title && desc && categories)?this.handleClick:null} disabled={(title && desc && categories)?false:true} id="btn">
             Publish
           </button>
         </form>
@@ -101,12 +99,6 @@ class Create extends React.Component {
   }
 
   }
-
-// const mapDispatchToprops = dispatch => {
-//   return {
-//     createData: (data) => dispatch(createData(data))
-//   };
-// }
 
 Create.propTypes = {
   createData: PropTypes.func.isRequired
@@ -117,4 +109,3 @@ Create.defaultProps = {
 }
 
 export default Create;
-  

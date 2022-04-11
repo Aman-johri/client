@@ -3,7 +3,6 @@ import {shallow,configure} from 'enzyme';
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 configure({ adapter: new Adapter() });
 
-
 describe("Testing", () => {
     it("snapshot test for Create Post", () => {
         const component = shallow(<Create />);
@@ -37,8 +36,25 @@ describe("Testing", () => {
         jest.spyOn(instance, "handleClick");
         component.setState({ title: "Aman Johri", desc: "Hello, I am Aman Johri" });
         component.find("#btn").simulate("click");
+        console.log("error",component.debug());
         expect(instance.handleClick).toHaveBeenCalledTimes(0);
       });
+
+    it("Button works when all field is filled", () => {
+      const mockCreateData = jest.fn();
+      const component = shallow(
+        <Create createData={mockCreateData}/>
+      );
+      console.log(component.debug());
+      console.log(component.state());
+      const instance = component.instance();
+      jest.spyOn(instance, "handleClick");
+      component.setState({ title: "Aman Johri", desc: "Hello, I am Aman Johri", categories:"life" });
+      component.find("#btn").simulate("click");
+      expect(instance.handleClick).toBeCalledTimes(1);
+
+
+    });
     });
 
 

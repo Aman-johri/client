@@ -22,6 +22,3 @@ describe("Testing", () => {
         expect(component.find("#desc").props().value).toEqual("Hello, I am Aman");
     });
 });
-
-
-

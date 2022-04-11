@@ -23,7 +23,7 @@ class Posts extends React.Component {
 
 const mapStatetoProps = (state) => {
   console.log(state)
-  return { data:state.data, error: state.error , isLoading: state.isLoading  };
+  return { data:state.data, error: state.error , isLoading: state.isLoading , dataObject: state.dataObject};
 }
 
 const mapDispatchprops = (dispatch) => {

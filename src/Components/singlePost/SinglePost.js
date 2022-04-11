@@ -96,4 +96,3 @@ SinglePost.defaultProps = {
 }
 
 export default SinglePost;
-

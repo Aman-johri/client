@@ -1,7 +1,6 @@
 import { deleteData, getData, updateData } from '../../redux/actions/postActions'
 const mapStateToProps = (state) => ({
     Postdata: state.singleData
-    
 })
 
 const mapDispatchToProps = (dispatch) => ({

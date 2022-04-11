@@ -33,6 +33,7 @@ export const deleteData = (postId) => {
                     msg: "Unable to delete data" 
                 })
             })
+            window.location.reload();
             window.location.href = '/Home';
     }
 }
@@ -92,5 +93,13 @@ export const updateData = (postId,post) => {
                     msg: "Unable to update data" 
                 })
             })
+    }
+}
+
+export const getDataObject = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "GETDATAOBJECT",
+        })
     }
 }

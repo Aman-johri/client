@@ -5,7 +5,7 @@ const initialState = {
     error: "",
     isLoading: false,
     singleData:[],
-    dataObject : {}
+    dataObject : []
 }
 
 const reducer = (state =initialState, action) => {
@@ -16,10 +16,15 @@ const reducer = (state =initialState, action) => {
             action.data.forEach(element => {
                 obj[element._id] = element;
             })
-            console.log("fetch",obj);
-            return { ...state, data: action.data, isLoading: true , dataObject: obj};
+            state.dataObject = obj;
+            console.log(state.dataObject);
+        return { ...state, data: action.data, isLoading: true , dataObject: obj};
         case "GETDATA":
-            return {...state, singleData: action.data , isLoading: true}
+            const data = action.data;
+            if(data.length === 0){
+                window.location.href = "/Home";
+            }
+            return {...state, singleData: action.data , isLoading: true };
         case "DELETE":
             return { ...state}
         case "CREATE":
@@ -33,3 +38,5 @@ const reducer = (state =initialState, action) => {
     }
 }
 export default reducer;
+
+
