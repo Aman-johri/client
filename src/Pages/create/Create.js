@@ -15,8 +15,7 @@ class Create extends React.Component {
     };
   }
   
-  handleTextChange = (e) => {
-    e.preventDefault();
+  handleTextChange = () => {
     const title = document.getElementById("title").value;
     const desc = document.getElementById("desc").value;
     const categories = document.getElementById("category").value;
@@ -27,8 +26,7 @@ class Create extends React.Component {
     });
   }
 
-  handleClick = e => {
-    e.preventDefault();
+  handleClick = () => {
     const post = {
       title: this.state.title,
       desc: this.state.desc,
@@ -39,8 +37,7 @@ class Create extends React.Component {
     window.alert("Congratulation! your post has been published...");
   }
   
-   handleEmpty = e => {
-     e.preventDefault();
+   handleEmpty = () => {
      const title = document.getElementById("title").value;
      const desc = document.getElementById("desc").value;
      const category = document.getElementById("category").value;

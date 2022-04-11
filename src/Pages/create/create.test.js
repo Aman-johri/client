@@ -26,7 +26,6 @@ describe("Testing", () => {
     it("check for description", () => {
         const component = shallow(<Create />);
         component.setState({ desc: "Hello, I am Aman Johri" });
-        console.log(component.debug);
         expect(component.state("desc")).toEqual("Hello, I am Aman Johri");
     });
 
@@ -35,10 +34,9 @@ describe("Testing", () => {
           <Create />
         );
         const instance = component.instance();
-        console.log(instance.handleClick);
         jest.spyOn(instance, "handleClick");
         component.setState({ title: "Aman Johri", desc: "Hello, I am Aman Johri" });
-        component.find("#btn").at(0).simulate("click");
+        component.find("#btn").simulate("click");
         expect(instance.handleClick).toHaveBeenCalledTimes(0);
       });
     });
