@@ -1,5 +1,5 @@
 import React from 'react'
-import "./singlePost.css";
+import "./editPostInfo.css";
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { deleteData, getData, updateData } from '../../redux/actions/postActions'
@@ -32,7 +32,8 @@ class SinglePost extends React.Component {
       isHidden: true,
       open: false,
       open1: false,
-      open2:false
+      open2: false,
+      img: "",
     }
   }
 
@@ -45,9 +46,7 @@ class SinglePost extends React.Component {
     this.setState({
       isHidden: !this.state.isHidden
     })
-    toast.info("You have choose to edit your blog then change the title and description in their respective fields", { position: toast.POSITION.TOP_CENTER });
-
-  }
+}
 
   handleClick1 = () => {
     this.setState({
@@ -58,12 +57,13 @@ class SinglePost extends React.Component {
   handleClickUpdate = () => {
     const post = {
       title: this.state.title,
-      desc: this.state.desc
+      desc: this.state.desc,
+      img: this.state.img
     };
     console.log(post);
     axios.put('http://localhost:5000/posts/' + this.state.id, post)
       .then(res => console.log(res.data));
-    window.location.href = "/";
+    // window.location.href = "/";
   }
 
   handleCloseOpen = () => {
@@ -89,24 +89,15 @@ class SinglePost extends React.Component {
   handleClose1 = () => {
     window.location.href = "/";
   }
-
-  handleClose3 = () => {
-    this.setState({
-      open2: false
-    })
-  }
-
-  handleUpdateOpen = () => {
+handleUpdateOpen = () => {
     this.setState({
       open1: true
     })
   }
 
-  // componentDidMount(){
-  //   const postId = window.location.href.split("/")[4];
-  //   this.props.getData(postId);
-  // }
-
+  componentDidMount() {
+      this.handleClick();
+  }
   render() {
     const {title, desc, createdAt, _id} = this.props.post;
     return (
@@ -122,7 +113,7 @@ class SinglePost extends React.Component {
                 <CloseIcon onClick={this.handleCloseOpen} />
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                View Post Details or Update Post
+                Edit Post (Fields are editable,only write in the fields you want to update)
               </Typography>
               <button className='singlePostBtn' hidden={this.state.isHidden} onClick={this.handleUpdateOpen} id="updatebtn" >
                 Update
@@ -131,14 +122,14 @@ class SinglePost extends React.Component {
           </AppBar>
           <div className='singlePost'>
             <div className='singlePostWrapper'>
-              <img className="singlePostImg" src={this.props.post.img} alt="post" />
+              {/* {this.state.update ? <input type="text" id="img" name="img" className='singlePostInput' value={this.state.img} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /> :  */}
+               <img className="singlePostImg" src={this.props.post.img} alt="post" />
               {this.state.update ?
                 <input type="text" id="title" name="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /> :
                 <h1 className='singlePostTitle'>
                   {title}
                   <div className='singlePostEdit'>
                     <i className='singlePostIcon fa fa-edit' id='edit' onClick={this.handleClick} ></i>
-                    <i className='singlePostIcon fa fa-trash' id='delete' onClick={this.handleClick1}></i>
                   </div>
                 </h1>
               }
@@ -153,7 +144,6 @@ class SinglePost extends React.Component {
                   </p>
               }
             </div>
-            {/* } */}
           </div>
         </Dialog>
         <Dialog
@@ -196,26 +186,6 @@ class SinglePost extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Dialog
-          open={this.state.open2}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Are you sure you want to delete this post?"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              If you click yes, your post will be deleted permanently.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose3}>No</Button>
-            <Button onClick={deleteData(_id)} >
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
       </>
     )
   }
@@ -225,13 +195,11 @@ class SinglePost extends React.Component {
 SinglePost.propTypes = {
   Postdata: PropTypes.object.isRequired,
   deleteData: PropTypes.func.isRequired,
-  getData: PropTypes.func.isRequired,
   updateData: PropTypes.func.isRequired
 }
 
 SinglePost.defaultProps = {
   deleteData: () => { },
-  getData: () => { },
   updateData: () => { }
 }
 

@@ -2,10 +2,11 @@ import { fetchData } from "../actions/postActions"
 
 const initialState = {
     data: [],
-    error: "",
+    error: false,
     isLoading: false,
     singleData:[],
-    dataObject : []
+    dataObject : [],
+    registerError : [],
 }
 
 const reducer = (state =initialState, action) => {
@@ -22,7 +23,7 @@ const reducer = (state =initialState, action) => {
         case "GETDATA":
             const data = action.data;
             if(data.length === 0){
-                window.location.href = "/Home";
+                window.location.href = "/";
             }
             return {...state, singleData: action.data , isLoading: true };
         case "DELETE":
@@ -33,6 +34,19 @@ const reducer = (state =initialState, action) => {
             return { ...state}
         case "ERROR":
             return { ...state, error: action.msg }
+        // case "REGISTER":
+        //     return { ...state}
+        case "SET_LOADER":
+            return {...state, isLoading: true};
+        case "CLOSE_LOADER":
+            return {...state , isLoading: false};
+        case "REGISTER_ERRORS":
+            return {...state, registerError: action.payload}
+        case "LOGIN_START":
+            return {...state, isLoading: true};
+        case "LOGIN_SUCCESS":
+            return {...state, isLoading: false ,};
+
         default:
             return state
     }

@@ -1,33 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing snapshot test for singlepost 1`] = `
-"<div className=\\"singlePost\\">
-  <div className=\\"singlePostWrapper\\">
-    <img className=\\"singlePostImg\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500\\" alt=\\"\\" />
-    <h1 className=\\"singlePostTitle\\">
-      Aman Johri
-      <div className=\\"singlePostEdit\\">
-        <i className=\\"singlePostIcon fa fa-edit\\" id=\\"edit\\" onClick={[Function (anonymous)]} />
-        <i className=\\"singlePostIcon fa fa-trash\\" id=\\"delete\\" onClick={[Function (anonymous)]} />
+"<Fragment>
+  <ForwardRef(Dialog) open={[undefined]} fullScreen={true}>
+    <ForwardRef(AppBar) sx={{...}}>
+      <ForwardRef(Toolbar)>
+        <ForwardRef(IconButton) edge=\\"start\\" color=\\"inherit\\" aria-label=\\"close\\">
+          <Memo(ForwardRef(CloseIcon)) onClick={[Function (anonymous)]} />
+        </ForwardRef(IconButton)>
+        <ForwardRef(Typography) sx={{...}} variant=\\"h6\\" component=\\"div\\">
+          View Post Details or Update Post
+        </ForwardRef(Typography)>
+        <button className=\\"singlePostBtn\\" hidden={true} onClick={[Function (anonymous)]} id=\\"updatebtn\\">
+          Update
+        </button>
+      </ForwardRef(Toolbar)>
+    </ForwardRef(AppBar)>
+    <div className=\\"singlePost\\">
+      <div className=\\"singlePostWrapper\\">
+        <img className=\\"singlePostImg\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500\\" alt=\\"\\" />
+        <h1 className=\\"singlePostTitle\\">
+          Aman Johri
+          <div className=\\"singlePostEdit\\">
+            <i className=\\"singlePostIcon fa fa-edit\\" id=\\"edit\\" onClick={[Function (anonymous)]} />
+          </div>
+        </h1>
+        <div className=\\"singlePostInfo\\">
+          <span className=\\"singlePostAuthor\\">
+            Author: 
+            <b>
+              Aman
+            </b>
+          </span>
+          <span className=\\"singlePostDate\\">
+            Sat Apr 02 2022
+          </span>
+        </div>
+        <p className=\\"singlePostDesc\\">
+          Hello, I am Aman Johri
+        </p>
       </div>
-    </h1>
-    <div className=\\"singlePostInfo\\">
-      <span className=\\"singlePostAuthor\\">
-        Author: 
-        <b>
-          Aman
-        </b>
-      </span>
-      <span className=\\"singlePostDate\\">
-        Sat Apr 02 2022
-      </span>
     </div>
-    <p className=\\"singlePostDesc\\">
-      Hello, I am Aman Johri
-    </p>
-    <button className=\\"singlePostBtn\\" hidden={true} onClick={[Function (anonymous)]} id=\\"updatebtn\\">
-      Update
-    </button>
-  </div>
-</div>"
+  </ForwardRef(Dialog)>
+  <ForwardRef(Dialog) open={false} aria-labelledby=\\"alert-dialog-title\\" aria-describedby=\\"alert-dialog-description\\">
+    <ForwardRef(DialogTitle) id=\\"alert-dialog-title\\">
+      Are you sure you don&#39;t want to edit this post?
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText) id=\\"alert-dialog-description\\">
+        If you click yes, you will be redirected to the home page.
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button) onClick={[Function (anonymous)]}>
+        No
+      </ForwardRef(Button)>
+      <ForwardRef(Button) onClick={[Function (anonymous)]}>
+        Yes
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
+  <ForwardRef(Dialog) open={false} aria-labelledby=\\"alert-dialog-title\\" aria-describedby=\\"alert-dialog-description\\">
+    <ForwardRef(DialogTitle) id=\\"alert-dialog-title\\">
+      Are you sure you want to update your post?
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText) id=\\"alert-dialog-description\\">
+        If you click yes, your previous data will be replaced by the new data.
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button) onClick={[Function (anonymous)]}>
+        No
+      </ForwardRef(Button)>
+      <ForwardRef(Button) onClick={[Function (anonymous)]} id=\\"supportyes\\">
+        Yes
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
+</Fragment>"
 `;

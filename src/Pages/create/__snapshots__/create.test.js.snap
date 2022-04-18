@@ -1,22 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing snapshot test for Create Post 1`] = `
-"<div className=\\"write\\">
-  <img className=\\"writeImg\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500\\" alt=\\"\\" />
-  <form className=\\"writeForm\\">
-    <div className=\\"writeFormGroup\\">
-      <input className=\\"writeInput1\\" placeholder=\\"Title...\\" type=\\"text\\" id=\\"title\\" name=\\"title\\" onChange={[Function: bound handleTextChange]} />
-      <input className=\\"category\\" placeholder=\\"Category...\\" type=\\"text\\" id=\\"category\\" name=\\"categories\\" onChange={[Function: bound handleTextChange]} />
+"<Fragment>
+  <ForwardRef(Dialog) open={[undefined]} onClose={[Function (anonymous)]} fullWidth={true} maxWidth=\\"lg\\" fullHeight={true}>
+    <div className=\\"write\\">
+      <img className=\\"writeImg\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500\\" alt=\\"\\" />
+      <form className=\\"writeForm\\">
+        <div className=\\"writeFormGroup\\">
+          <input className=\\"writeInput1\\" placeholder=\\"Title...\\" type=\\"text\\" id=\\"title\\" name=\\"title\\" minlength=\\"10\\" onChange={[Function: bound handleTextChange]} required={true} />
+          <input className=\\"category\\" placeholder=\\"Category...\\" type=\\"text\\" id=\\"category\\" name=\\"categories\\" onChange={[Function: bound handleTextChange]} required={true} />
+        </div>
+        <div className=\\"writeFormGroup\\">
+          <textarea className=\\"writeInput2 writeText\\" placeholder=\\"Tell your story...\\" type=\\"text\\" id=\\"desc\\" name=\\"desc\\" onChange={[Function: bound handleTextChange]} required={true} />
+        </div>
+        <div className=\\"button\\">
+          <button className=\\"writeSubmit1\\" onClick={[Function (anonymous)]} id=\\"btn\\">
+            Cancel
+          </button>
+          <button className=\\"writeSubmit2\\" onClick={{...}} id=\\"btn\\">
+            Publish
+          </button>
+        </div>
+      </form>
     </div>
-    <div className=\\"writeFormGroup\\">
-      <textarea className=\\"writeInput2 writeText\\" placeholder=\\"Tell your story...\\" type=\\"text\\" id=\\"desc\\" name=\\"desc\\" onChange={[Function: bound handleTextChange]} />
-    </div>
-    <h4 style={{...}}>
-      *To enable Publish button provide all the fields value correctly
-    </h4>
-    <button className=\\"writeSubmit\\" onClick={{...}} disabled={true} id=\\"btn\\">
-      Publish
-    </button>
-  </form>
-</div>"
+  </ForwardRef(Dialog)>
+  <ForwardRef(Dialog) open={false} onClose={[Function (anonymous)]} aria-describedby=\\"alert-dialog-slide-description\\">
+    <ForwardRef(DialogTitle)>
+      Do you want to cancel your create Post?
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText) id=\\"alert-dialog-slide-description\\">
+        If you cancel your create post, your post will not be saved.
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button) onClick={[Function (anonymous)]}>
+        Disagree
+      </ForwardRef(Button)>
+      <ForwardRef(Button) onClick={[Function (anonymous)]}>
+        Agree
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
+</Fragment>"
 `;

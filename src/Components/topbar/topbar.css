@@ -57,6 +57,7 @@
     font-size: 18px;
     font-weight: 300;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .topSearchIcon{
@@ -65,12 +66,19 @@
     cursor: pointer;
     margin-left: 15px;
 }
+
+.topList1{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+}
 .linkTo{
     text-decoration: none;
-    color: #444;
+    justify-content: space-around;
+
 }
 
-.linkTo:hover{
+.link:hover{
     color: aqua;
     text-decoration: underline;
 }

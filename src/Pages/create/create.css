@@ -2,13 +2,13 @@
   padding-top: 20px;
 }
 
-.writeImg {
-  margin-left: 150px;
-  width: 70vw;
+/* .writeImg {
+  margin-left: 80px;
+  width: 75vw;
   height: 250px;
   border-radius: 10px;
   object-fit: cover;
-}
+} */
 
 .writeForm {
   position: relative;
@@ -34,33 +34,44 @@
 }
 
 .category{
-  margin-top: 20px;
-  font-size: 30px;
+  margin-top: 10px;
   margin-bottom: 40;
-  padding: 10px;
+  padding: 19px;
   border: 1px solid;
   border-radius: 10px;
-  width: 24%;
-  margin-left: 10px;
+  width: 29%;
+  
 }
 
 .writeInput1 {
-  margin-top: 20px;
-  font-size: 30px;
-  margin-bottom: 20;
-  padding: 10px;
+  margin-top: 10px;
+  margin-left: -70px;
+  margin-right: 10px;
+  padding: 19px;
   border: 1px solid;
   border-radius: 10px;
-  width: 50%;
+  width: 65%;
 }
 
 .writeInput2 {
-  margin-top: 20px;
+  margin-top: 5px;
   font-size: 30px;
+  padding: 20px;
+  padding-bottom: 60px;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 95%;
+  margin-left: -70px;
+  margin-bottom: 50px;
+}
+
+.writeInput21 {
+  margin-top: 5px;
   padding: 20px;
   border: 1px solid;
   border-radius: 10px;
-  width: 75%;
+  width: 95%;
+  margin-left: -70px;
 }
 
 .writeInput::placeholder {
@@ -68,28 +79,43 @@
   font-weight: 300;
 }
 
-
-
 .writeText {
   height: 10vh;
   font-family: inherit;
   font-size: 20px;
 }
 
-.writeSubmit {
+.button{
+  display: flex;
+  flex-direction: row;
+  float: right;
+}
+
+.writeSubmit1 {
   position: absolute;
-  top: 220px;
-  right: 50%;
+  top: 190px;
+  right: 7%;
   color: white;
   background-color: teal;
   padding: 10px;
   border: none;
-  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
   margin-top: 30px;
+}
+.writeSubmit2{
+  border: none;
+  padding: 10px;
+  background-color: teal;
+  width: 100px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .writeSubmit:disabled{
@@ -111,3 +137,15 @@
   margin-left: 10px;
   font-size: 20px;
 }
+.Error{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.Error1{
+  display: flex;
+  flex-direction: row;
+  margin-top: -50px;
+  margin-bottom: 40px;
+}
+

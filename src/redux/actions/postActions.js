@@ -34,7 +34,7 @@ export const deleteData = (postId) => {
                 })
             })
             window.location.reload();
-            window.location.href = '/Home';
+            window.location.href = '/';
     }
 }
 
@@ -59,11 +59,9 @@ export const getData = (postId) => {
 
 
 export const createData = (post) => {
-    console.log("create data",post);
     return (dispatch) => {
         axios.post('http://localhost:5000/posts',post)
             .then(response => {
-                console.log(response);
                 dispatch({
                     type: "CREATE",
                     data: response.data,
@@ -86,7 +84,7 @@ export const updateData = (postId,post) => {
                     type: "UPDATE",
                     data: response.data,
                 })
-            },window.alert("Congratulation! your post has been updated..."))
+            })
             .catch(err => {
                 dispatch({ 
                     type: "ERROR",
@@ -101,5 +99,85 @@ export const getDataObject = () => {
         dispatch({
             type: "GETDATAOBJECT",
         })
+    }
+}
+
+// export const registerUser = (state) => {
+//     return (dispatch) => {
+//         const config = {
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//         };
+//         dispatch({
+//             type: "SET_LOADER",
+//         });
+//         axios.post("http://localhost:5000/auth/register",state,config)
+//             dispatch({
+//                 type: "CLOSE_LOADER",
+//             });
+//         }
+//         catch(error){
+//             dispatch({
+//                 type: "CLOSE_LOADER",
+//             });
+//             dispatch({
+//                 type: "REGISTER_ERRORS",
+//                 payload: error.response.data.errors,
+//             });
+//         }
+//     }
+// }
+
+export const registerUser = (state) => {
+    return async (dispatch) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        dispatch({
+            type: "SET_LOADER",
+        });
+        await axios.post("http://localhost:5000/auth/register",state,config)
+            .then(response => {
+                dispatch({
+                    type: "CLOSE_LOADER",
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: "CLOSE_LOADER",
+                });
+                dispatch({
+                    type: "REGISTER_ERRORS",
+                    payload: error.response.data.errors,
+                });
+            })
+    }
+}
+
+export const loginUser = (state) => {
+    return async (dispatch) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        dispatch({
+            type: "LOGIN_START",
+        });
+        await axios.post("http://localhost:5000/auth/login",state,config)
+            .then(response => {
+                dispatch({
+                    type: "LOGIN_SUCCESS",
+                    payload: response.data,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: "LOGIN_FAILURE",
+                });
+            })
     }
 }
