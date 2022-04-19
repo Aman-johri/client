@@ -2,24 +2,72 @@
 
 exports[`Testing snapshot test for Create Post 1`] = `
 "<Fragment>
-  <ForwardRef(Dialog) open={[undefined]} onClose={[Function (anonymous)]} fullWidth={true} maxWidth=\\"lg\\" fullHeight={true}>
+  <ForwardRef(Dialog) open={[undefined]} id=\\"diolog\\" Close={[Function (anonymous)]} fullWidth={true} maxWidth=\\"lg\\" fullHeight={true}>
+    <ForwardRef(AppBar) sx={{...}}>
+      <ForwardRef(Toolbar)>
+        <ForwardRef(IconButton) edge=\\"start\\" color=\\"inherit\\" aria-label=\\"close\\">
+          <Memo(ForwardRef(CloseIcon)) onClick={[Function (anonymous)]} id=\\"btn\\" />
+        </ForwardRef(IconButton)>
+        <ForwardRef(Typography) sx={{...}} variant=\\"h6\\" component=\\"div\\">
+          Create Post
+        </ForwardRef(Typography)>
+        <button className=\\"writeSubmit2\\" onClick={{...}} id=\\"btn\\">
+          Publish
+        </button>
+      </ForwardRef(Toolbar)>
+    </ForwardRef(AppBar)>
     <div className=\\"write\\">
-      <img className=\\"writeImg\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500\\" alt=\\"\\" />
       <form className=\\"writeForm\\">
         <div className=\\"writeFormGroup\\">
           <input className=\\"writeInput1\\" placeholder=\\"Title...\\" type=\\"text\\" id=\\"title\\" name=\\"title\\" minlength=\\"10\\" onChange={[Function: bound handleTextChange]} required={true} />
-          <input className=\\"category\\" placeholder=\\"Category...\\" type=\\"text\\" id=\\"category\\" name=\\"categories\\" onChange={[Function: bound handleTextChange]} required={true} />
+          <select className=\\"category\\" id=\\"category\\" name=\\"categories\\" onChange={[Function: bound handleTextChange]} required={true}>
+            <option value=\\"\\">
+              Select Category
+            </option>
+            <option value=\\"Technology\\">
+              Technology
+            </option>
+            <option value=\\"Business\\">
+              Business
+            </option>
+            <option value=\\"Entertainment\\">
+              Entertainment
+            </option>
+            <option value=\\"Sports\\">
+              Sports
+            </option>
+            <option value=\\"Science\\">
+              Science
+            </option>
+            <option value=\\"Health\\">
+              Health
+            </option>
+          </select>
+          <br />
+        </div>
+        <div className=\\"Error\\">
+          <p style={{...}}>
+            *Title must be atleast 10 characters long
+          </p>
+          <p style={{...}}>
+            *Required
+          </p>
+        </div>
+        <div className=\\"writeFormGroup\\">
+          <input className=\\"writeInput21\\" placeholder=\\"Enter the URL of your image\\" type=\\"text\\" id=\\"img\\" name=\\"img\\" minlength=\\"10\\" onChange={[Function: bound handleTextChange]} required={true} />
+        </div>
+        <div className=\\"Error\\">
+          <p style={{...}}>
+            *Required
+          </p>
         </div>
         <div className=\\"writeFormGroup\\">
           <textarea className=\\"writeInput2 writeText\\" placeholder=\\"Tell your story...\\" type=\\"text\\" id=\\"desc\\" name=\\"desc\\" onChange={[Function: bound handleTextChange]} required={true} />
         </div>
-        <div className=\\"button\\">
-          <button className=\\"writeSubmit1\\" onClick={[Function (anonymous)]} id=\\"btn\\">
-            Cancel
-          </button>
-          <button className=\\"writeSubmit2\\" onClick={{...}} id=\\"btn\\">
-            Publish
-          </button>
+        <div className=\\"Error1\\">
+          <p style={{...}}>
+            *Desc must be atleast 10 character long
+          </p>
         </div>
       </form>
     </div>

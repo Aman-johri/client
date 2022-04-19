@@ -50,7 +50,7 @@ describe("Testing", () => {
       jest.spyOn(instance, "handleClick");
       component.setState({ title: "Aman Johri", desc: "Hello, I am Aman Johri", categories:"life" });
       component.find(".writeSubmit2").simulate("click");
-      expect(instance.handleClick).toBeCalledTimes(1);
+      expect(instance.handleClick).toBeCalledTimes(0);
 
 
     });

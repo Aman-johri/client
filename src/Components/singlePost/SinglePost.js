@@ -1,11 +1,9 @@
 import React from 'react'
 import "./singlePost.css";
 import axios from 'axios'
-import { connect } from 'react-redux';
-import { deleteData, getData, updateData } from '../../redux/actions/postActions'
 import PropTypes from 'prop-types';
-import Tooltip from "@mui/material/Tooltip";
 import Button from '@mui/material/Button';
+import {deleteData} from '../../redux/actions/postActions'
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +14,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -32,7 +30,8 @@ class SinglePost extends React.Component {
       isHidden: true,
       open: false,
       open1: false,
-      open2:false
+      open2:false,
+      img: "",
     }
   }
 
@@ -40,12 +39,13 @@ class SinglePost extends React.Component {
     this.setState({
       title: this.props.post.title,
       desc: this.props.post.desc,
+      img: this.props.post.img,
       update: true
     })
     this.setState({
       isHidden: !this.state.isHidden
     })
-    toast.info("You have choose to edit your blog then change the title and description in their respective fields", { position: toast.POSITION.TOP_CENTER });
+    toast.info("You have choose to edit your blog then change the title,description and Image Url in their respective fields", { position: toast.POSITION.TOP_CENTER });
 
   }
 
@@ -124,7 +124,7 @@ class SinglePost extends React.Component {
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 View Post Details or Update Post
               </Typography>
-              <button className='singlePostBtn' hidden={this.state.isHidden} onClick={this.handleUpdateOpen} id="updatebtn" >
+              <button className='singlePostBtn' hidden={this.state.isHidden} onClick={(this.state.title.length > 10 && this.state.desc !== "" && this.state.img !== "")?this.handleUpdateOpen:null} id="updatebtn" >
                 Update
               </button>
             </Toolbar>
@@ -132,8 +132,9 @@ class SinglePost extends React.Component {
           <div className='singlePost'>
             <div className='singlePostWrapper'>
               <img className="singlePostImg" src={this.props.post.img} alt="post" />
-              {this.state.update ?
-                <input type="text" id="title" name="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /> :
+              {this.state.update ? <><h3>Image Url:</h3><input type="text" id="img" name="img" className='singlePostTitleInput' placeholder="If you want to change the image of the blog then paste the new link here (Optional)"value={this.state.img} onChange={(e) => this.setState({...this.state, [e.target.name]: e.target.value })} /><p style={{color:"red"}}>{this.state.img.length < 5 ? "Enter the Url of the image for your blog" : ""}</p></> : null}
+              {this.state.update ?<>
+                <h3 style={{marginTop:20}}>Title:</h3><input type="text" id="title" name="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /><p style={{color:"red"}}>{this.state.title.length < 10 ? "Title must be of atleast 10 character long" : ""}</p></> :
                 <h1 className='singlePostTitle'>
                   {title}
                   <div className='singlePostEdit'>
@@ -147,7 +148,7 @@ class SinglePost extends React.Component {
                 <span className='singlePostDate'>{new Date(createdAt).toDateString()}</span>
               </div>
               {
-                this.state.update ? <textarea className="singlePostDescInput" name="desc" id="desc" value={this.state.desc} onChange={(e) => this.setState({ [e.target.name]: e.target.value })}></textarea> :
+                this.state.update ? <><h3 style={{marginTop:20}}>Description:</h3><textarea className="singlePostDescInput" name="desc" id="desc" value={this.state.desc} onChange={(e) => this.setState({ [e.target.name]: e.target.value })}></textarea><p style={{color:"red"}}>{this.state.desc === "" ? "Description should not be empty" : ""}</p></> :
                   <p className='singlePostDesc'>
                     {desc}
                   </p>

@@ -57,11 +57,9 @@ class Post extends React.Component {
                         <div className="postCats">
                             <span className="postCat">{this.props.post.categories}</span>
                         </div>
-                        {/* <Link to={`/single/${this.props.post._id}`}> */}
                         <Tooltip title={<h3>{this.props.post.title}</h3>} placement="right">
                             <span className="postTitle">{this.props.post.title.slice(0, 15)}{this.props.post.title.length > 15 ? " ...." : ""}</span>
                         </Tooltip>
-                        {/* </Link> */}
                         <span className="postDate">{new Date(this.props.post.createdAt).toDateString()}</span>
                         <button className='singlePostIcon3' onClick={this.handleClickEdit}>View Blog</button>
                     </div>

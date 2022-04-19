@@ -16,27 +16,9 @@ import reducer from './redux/reducers/postReducer';
 import { BrowserRouter } from 'react-router-dom';
 const middleware = [thunk];
 
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// }
 
-// const persistedReducer = persistReducer(persistConfig, reducer);
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware)));
-
-// const persistor = persistStore(store);
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//      {/* <PersistGate loading={null} persistor={persistor}>  */}
-//     <BrowserRouter basename='/'>
-//     <Route path={'/'} compoent={App} />
-//     </BrowserRouter>
-//     {/* </PersistGate> */}
-//   </Provider>,
-//   document.getElementById('root')
-// );
 
 const Root = () => {
   return (

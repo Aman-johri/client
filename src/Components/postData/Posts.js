@@ -13,7 +13,7 @@ class Posts extends React.Component {
   render() {
     return (
       <div className='posts'>
-        {this.props.isLoading ? this.props.data.reverse().map(post => (
+        {this.props.isLoading ? this.props.data.map(post => (
           <CardPost key={post._id} post={post} />
         )) : <h2 className='error'>Sorry! unable to show blogs this time.<br />*This is due to network problem,Refresh this page again or check your internet connection*</h2>}
       </div>

@@ -3,9 +3,10 @@
 exports[`Testing CardPost component snapshot test 1`] = `
 "<Fragment>
   <div className=\\"post\\">
-    <img className=\\"posting\\" src=\\"https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940\\" />
+    <img className=\\"postImg\\" src={[undefined]} />
     <div className=\\"postInfo\\">
       <div className=\\"PostEdit\\">
+        <i className=\\"singlePostIcon1 fa fa-edit\\" onClick={[Function (anonymous)]} id=\\"edit\\" />
         <i className=\\"singlePostIcon2 fa fa-trash\\" id=\\"delete\\" onClick={[Function: bound ]} />
       </div>
       <div className=\\"postCats\\">
@@ -21,7 +22,7 @@ exports[`Testing CardPost component snapshot test 1`] = `
       <span className=\\"postDate\\">
         Sat Apr 02 2022
       </span>
-      <button className=\\"singlePostIcon1\\" onClick={[Function (anonymous)]}>
+      <button className=\\"singlePostIcon3\\" onClick={[Function (anonymous)]}>
         View Blog
       </button>
     </div>
@@ -44,6 +45,7 @@ exports[`Testing CardPost component snapshot test 1`] = `
       </ForwardRef(DialogActions)>
     </ForwardRef(Dialog)>
   </div>
-  <SinglePost id={[undefined]} open={false} post={{...}} deleteData={[Function: deleteData]} getData={[Function: getData]} updateData={[Function: updateData]} />
+  <SinglePost id={[undefined]} open={false} img={[undefined]} post={{...}} deleteData={[Function: deleteData]} getData={[Function: getData]} updateData={[Function: updateData]} />
+  <Connect(SinglePost) id={[undefined]} open={false} img={[undefined]} post={{...}} />
 </Fragment>"
 `;

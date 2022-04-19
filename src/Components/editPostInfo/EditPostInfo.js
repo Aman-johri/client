@@ -1,10 +1,7 @@
 import React from 'react'
 import "./editPostInfo.css";
-import axios from 'axios'
-import { connect } from 'react-redux';
-import { deleteData, getData, updateData } from '../../redux/actions/postActions'
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import Tooltip from "@mui/material/Tooltip";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
@@ -16,7 +13,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -41,6 +38,7 @@ class SinglePost extends React.Component {
     this.setState({
       title: this.props.post.title,
       desc: this.props.post.desc,
+      img: this.props.post.img,
       update: true
     })
     this.setState({
@@ -60,10 +58,9 @@ class SinglePost extends React.Component {
       desc: this.state.desc,
       img: this.state.img
     };
-    console.log(post);
-    axios.put('http://localhost:5000/posts/' + this.state.id, post)
+    axios.put('http://localhost:5000/posts/'+this.state.id, post)
       .then(res => console.log(res.data));
-    // window.location.href = "/";
+    window.location.href = "/";
   }
 
   handleCloseOpen = () => {
@@ -90,10 +87,12 @@ class SinglePost extends React.Component {
     window.location.href = "/";
   }
 handleUpdateOpen = () => {
+  
     this.setState({
       open1: true
     })
   }
+
 
   componentDidMount() {
       this.handleClick();
@@ -115,17 +114,17 @@ handleUpdateOpen = () => {
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 Edit Post (Fields are editable,only write in the fields you want to update)
               </Typography>
-              <button className='singlePostBtn' hidden={this.state.isHidden} onClick={this.handleUpdateOpen} id="updatebtn" >
+              <button className='singlePostBtn' hidden={this.state.isHidden} onClick={(this.state.title.length > 10 && this.state.desc !== ""  && this.state.img !== "") ? this.handleUpdateOpen : null} id="updatebtn" >
                 Update
               </button>
             </Toolbar>
           </AppBar>
           <div className='singlePost'>
             <div className='singlePostWrapper'>
-              {/* {this.state.update ? <input type="text" id="img" name="img" className='singlePostInput' value={this.state.img} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /> :  */}
-               <img className="singlePostImg" src={this.props.post.img} alt="post" />
-              {this.state.update ?
-                <input type="text" id="title" name="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /> :
+            <img className="singlePostImg" src={this.props.post.img} alt="post" />
+              <h3>Image Url:</h3>{this.state.update ? <><input type="text" id="img" name="img" className='singlePostTitleInput' placeholder="If you want to change the image of the blog then paste the new link here" value={this.state.img} onChange={(e) => this.setState({...this.state, [e.target.name]: e.target.value })} /><p style={{color:"red"}} >{this.state.img.length < 5  ? "Enter the URL of the Image for your Blog" : ""}</p></>: null}
+              <h3 style={{marginTop:20}}>Title:</h3>{this.state.update ?
+                <><input type="text" id="title" name="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /><p style={{color:"red"}}>{this.state.title.length < 10 ? "Title must be atleast 10 character long" : ""}</p></> :
                 <h1 className='singlePostTitle'>
                   {title}
                   <div className='singlePostEdit'>
@@ -137,8 +136,8 @@ handleUpdateOpen = () => {
                 <span className='singlePostAuthor'>Author: <b>Aman</b></span>
                 <span className='singlePostDate'>{new Date(createdAt).toDateString()}</span>
               </div>
-              {
-                this.state.update ? <textarea className="singlePostDescInput" name="desc" id="desc" value={this.state.desc} onChange={(e) => this.setState({ [e.target.name]: e.target.value })}></textarea> :
+              <h3 style={{marginTop:20}}>Description:</h3>{
+                this.state.update ? <><textarea className="singlePostDescInput" name="desc" id="desc" value={this.state.desc} onChange={(e) => this.setState({ [e.target.name]: e.target.value })}></textarea><p style={{color:"red"}}>{this.state.desc.length < 10 ? "Description should not be empty" : ""}</p></> :
                   <p className='singlePostDesc'>
                     {desc}
                   </p>
