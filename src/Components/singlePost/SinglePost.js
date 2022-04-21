@@ -16,6 +16,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import SingleEditPostInfo from "../singleEditPostInfo/SingleEditPostInfo";
 toast.configure();
 
 
@@ -37,21 +38,13 @@ class SinglePost extends React.Component {
 
   handleClick = () => {
     this.setState({
-      title: this.props.post.title,
-      desc: this.props.post.desc,
-      img: this.props.post.img,
-      update: true
+      open2:!this.state.open2
     })
-    this.setState({
-      isHidden: !this.state.isHidden
-    })
-    toast.info("You have choose to edit your blog then change the title,description and Image Url in their respective fields", { position: toast.POSITION.TOP_CENTER });
-
   }
 
   handleClick1 = () => {
     this.setState({
-      open2: true
+      open:!this.state.open
     })
   }
 
@@ -67,9 +60,7 @@ class SinglePost extends React.Component {
   }
 
   handleCloseOpen = () => {
-    this.setState({
-      open: true
-    })
+    this.props.onClose();
   }
 
   handleClose = () => {
@@ -87,12 +78,14 @@ class SinglePost extends React.Component {
 
 
   handleClose1 = () => {
-    window.location.href = "/";
+    this.setState({
+      open:false
+    })
   }
 
   handleClose3 = () => {
     this.setState({
-      open2: false
+      open: false
     })
   }
 
@@ -102,10 +95,10 @@ class SinglePost extends React.Component {
     })
   }
 
-  // componentDidMount(){
-  //   const postId = window.location.href.split("/")[4];
-  //   this.props.getData(postId);
-  // }
+  handleError = () => {
+    toast.info("you have not done any changes or you have not fullfilled the conditions of the given text fields" , { position: toast.POSITION.TOP_CENTER });
+  }
+
 
   render() {
     const {title, desc, createdAt, _id} = this.props.post;
@@ -124,18 +117,20 @@ class SinglePost extends React.Component {
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 View Post Details or Update Post
               </Typography>
-              <button className='singlePostBtn' hidden={this.state.isHidden} onClick={(this.state.title.length > 10 && this.state.desc !== "" && this.state.img !== "")?this.handleUpdateOpen:null} id="updatebtn" >
+              <button className='singlePostBtn' hidden={this.state.isHidden} onClick={((this.state.title.length > 10 && this.state.desc !== "" && this.state.img !== "") && (this.state.title != this.props.post.title || this.state.desc != this.props.post.desc || this.state.img != this.props.post.img)) ? this.handleUpdateOpen : this.handleError} id="updatebtn" >
                 Update
               </button>
             </Toolbar>
           </AppBar>
           <div className='singlePost'>
             <div className='singlePostWrapper'>
-              <img className="singlePostImg" src={this.props.post.img} alt="post" />
+              <div className='singlePostImage'>
+              <img className="singlePostImg" src={this.props.post.img} />
+              </div>
               {this.state.update ? <><h3>Image Url:</h3><input type="text" id="img" name="img" className='singlePostTitleInput' placeholder="If you want to change the image of the blog then paste the new link here (Optional)"value={this.state.img} onChange={(e) => this.setState({...this.state, [e.target.name]: e.target.value })} /><p style={{color:"red"}}>{this.state.img.length < 5 ? "Enter the Url of the image for your blog" : ""}</p></> : null}
               {this.state.update ?<>
                 <h3 style={{marginTop:20}}>Title:</h3><input type="text" id="title" name="title" className="singlePostTitleInput" value={this.state.title} onChange={(e) => this.setState({ [e.target.name]: e.target.value })} /><p style={{color:"red"}}>{this.state.title.length < 10 ? "Title must be of atleast 10 character long" : ""}</p></> :
-                <h1 className='singlePostTitle'>
+                <h1 className='singlePostTitle' style={{marginTop:20}}>
                   {title}
                   <div className='singlePostEdit'>
                     <i className='singlePostIcon fa fa-edit' id='edit' onClick={this.handleClick} ></i>
@@ -154,10 +149,9 @@ class SinglePost extends React.Component {
                   </p>
               }
             </div>
-            {/* } */}
           </div>
         </Dialog>
-        <Dialog
+        {/* <Dialog
           open={this.state.open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -167,7 +161,7 @@ class SinglePost extends React.Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              If you click yes, you will be redirected to the home page.
+              If you click yes, you will loose your change data.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -176,8 +170,8 @@ class SinglePost extends React.Component {
               Yes
             </Button>
           </DialogActions>
-        </Dialog>
-        <Dialog
+        </Dialog> */}
+        {/* <Dialog
           open={this.state.open1}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -196,9 +190,9 @@ class SinglePost extends React.Component {
               Yes
             </Button>
           </DialogActions>
-        </Dialog>
+        </Dialog> */}
         <Dialog
-          open={this.state.open2}
+          open={this.state.open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -212,11 +206,12 @@ class SinglePost extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose3}>No</Button>
-            <Button onClick={deleteData(_id)} >
+            <Button onClick={deleteData(this.props.post._id)} >
               Yes
             </Button>
           </DialogActions>
         </Dialog>
+        <SingleEditPostInfo id={this.props.post._id} open={this.state.open2} onClose={this.handleClick}img={this.state.img} post={this.props.post} />
       </>
     )
   }

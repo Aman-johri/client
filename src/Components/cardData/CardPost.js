@@ -29,7 +29,7 @@ class Post extends React.Component {
     }
 
     handleClickOpen2 = () => {
-        this.setState({ open2: true });
+        this.setState({ open2: !this.state.open2 });
     };
 
     handleClickOpen = () => {
@@ -41,8 +41,12 @@ class Post extends React.Component {
     };
 
     handleClickEdit = () => {
-        this.setState({ postOpen: true , open2: false});
+        this.setState({ postOpen: !this.state.postOpen , open2: false});
     };
+
+    // handleDelete = () => {
+    //     this.props.deleteData(this.props.post._id);
+    // }
     render() {
         return (
             <>
@@ -61,7 +65,7 @@ class Post extends React.Component {
                             <span className="postTitle">{this.props.post.title.slice(0, 15)}{this.props.post.title.length > 15 ? " ...." : ""}</span>
                         </Tooltip>
                         <span className="postDate">{new Date(this.props.post.createdAt).toDateString()}</span>
-                        <button className='singlePostIcon3' onClick={this.handleClickEdit}>View Blog</button>
+                        <Button onClick={this.handleClickEdit}>View Blog</Button>
                     </div>
                     <Dialog
                         open={this.state.open}
@@ -84,8 +88,8 @@ class Post extends React.Component {
                         </DialogActions>
                     </Dialog>
                 </div>
-                <SinglePost id={this.props.post._id} open={this.state.postOpen} img={this.props.post.img} post={this.props.post} />
-                <EditPostInfo id={this.props.post._id} open={this.state.open2} img={this.props.post.img} post={this.props.post} />
+                <SinglePost id={this.props.post._id} open={this.state.postOpen} onClose={this.handleClickEdit} onClose1={this.handleClickOpen2} img={this.props.post.img} post={this.props.post} />
+                <EditPostInfo id={this.props.post._id} open={this.state.open2} onClose={this.handleClickOpen2} img={this.props.post.img} post={this.props.post} />
             </>
         );
     }

@@ -8,6 +8,11 @@ class Topbar extends React.Component {
             user: true
         };
     }
+
+    handleLogout = () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+    };
     render(){
         return (
             <div className="top">
@@ -19,9 +24,9 @@ class Topbar extends React.Component {
                 <div className="topCenter">
                     <ul className="toplist">
                         <li className="topListItem"><Link className="link" to="/">HOME</Link></li>
-                        <li className="topListItem"><Link className="link" to="/">ABOUT</Link></li>
-                        <li className="topListItem"><Link className="link" to="/">CONTACT</Link></li>
-                        {/* <li className="topListItem">{this.state.user && "LOGOUT"}</li>       */}
+                        <li className="topListItem">ABOUT</li>
+                        <li className="topListItem">CONTACT</li>
+                        { localStorage.getItem("token") == null ? null : <li className="topListItem"><button className="logout" onClick={this.handleLogout}>LOGOUT</button></li>  }    
                     </ul>
                 </div>
                 <div className="topRight">

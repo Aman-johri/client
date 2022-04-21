@@ -1,6 +1,7 @@
 import "./login.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Login extends React.Component {
 
@@ -18,17 +19,28 @@ class Login extends React.Component {
     e.preventDefault();
     console.log(this.state);
     const post = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    this.props.loginUser(post);
+      email:this.state.email,
+      password:this.state.password
+    }
+    axios.post("http://localhost:5000/auth/login",post)
+      .then((response) => {
+        console.log("abcd",response);
+        localStorage.setItem("token", response.data.token);
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          error: true,
+        });
+      });
   } 
 
   render() {
   return (
     <div className="login">
       <span className="loginTitle">Login</span>
-      <form className="loginForm">
+      <form className="loginForm" onSubmit={this.handleClick}>
         <label>Email</label>
         <input className="loginInput" name="email" type="text" placeholder="Enter your email..." onChange={(e) => this.setState({[e.target.name] : e.target.value})}/>
         <label>Password</label>
@@ -36,7 +48,7 @@ class Login extends React.Component {
         <button className="loginButton">Login</button>
       </form>
       <Link to="/register">
-        <button className="loginRegisterButton" onClick={this.handleClick}>Register</button>
+        <button className="loginRegisterButton">Register</button>
       </Link>
     </div>
   );

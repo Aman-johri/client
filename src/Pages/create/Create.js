@@ -28,7 +28,8 @@ class Create extends React.Component {
       desc: "",
       categories: "",
       open: false,
-      img:""
+      img: "",
+      setImag: "",
     };
     this.handleTextChange = this.handleTextChange.bind(this);
   }
@@ -39,11 +40,20 @@ class Create extends React.Component {
     });
   }
 
-  handleClickOpen = (e) => {
+  handleClickClose = (e) => {
+    console.log("hi");
     e.preventDefault();
-    this.setState({
-      open: true
-    })
+    if (this.state.title == "" && this.state.desc == "" && this.state.categories == "" && this.state.img == "") {
+      this.setState({
+        close: false
+      })
+      this.props.onClose();
+    }
+    else {
+      this.setState({
+        open: true
+      })
+    }
   };
 
   handleClose = () => {
@@ -53,7 +63,16 @@ class Create extends React.Component {
   };
 
   handleCloseOnly = () => {
-    window.location.href = "/";
+    this.setState({
+      open: false
+    });
+    this.props.onClose();
+    this.setState({
+      title: "",
+      desc: "",
+      categories: "",
+      img: "",
+    })
   };
 
 
@@ -63,64 +82,66 @@ class Create extends React.Component {
       title: this.state.title,
       desc: this.state.desc,
       categories: this.state.categories,
-      img:this.state.img
+      img: this.state.img
     };
     this.props.createData(post);
-    toast.success("Post created successfully");
     setTimeout(() => {
-    window.location.href = "/";
-  }, 200);
-};
-  render() {
+      window.location.href = "/";
+    }, 200);
+  }
+
+  handleEmpty = (e) => {
+    e.preventDefault();
+    let title = document.getElementById("title").value;
+    let desc = document.getElementById("desc").value;
+    let img = document.getElementById("img").value;
+    let categories = document.getElementById("category").value;
+
+    if (title!="" && desc!="" && img!="" && categories!="" && title.length >= 10 && desc.length >= 10){
+      document.getElementById("btn1").removeAttribute("disabled");
+    }
+  }
+
+  componentDidMount() {
+    if(localStorage.getItem("token") === null){
+      window.location.href = "/login";
+    }
+    else{
+    this.setState({
+      close:this.props.openDiolog
+    })
+  }
+}
+  render() {  
 
     const { title, desc, categories, img } = this.state;
+    const enable = title.length > 0 && desc.length > 0 && img.length > 0 && categories.length > 0
+    console.log(enable);
     return (
       <>
         <Dialog open={this.props.openDiolog} id="diolog" Close={this.handleClose} fullWidth maxWidth="lg" fullHeight>
-        <AppBar sx={{ position: 'relative' }}>
+          <AppBar sx={{ position: 'relative' }}>
             <Toolbar>
               <IconButton
                 edge="start"
                 color="inherit"
                 aria-label="close"
               >
-              <CloseIcon onClick={this.handleClickOpen} id="btn" />
+              <CloseIcon onClick={this.handleClickClose} id="btn" />
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 Create Post
               </Typography>
-              <button className="writeSubmit2" onClick={(this.state.title.length > 10 && this.state.desc != "" && this.state.categories != "" && this.state.img != "")?this.handleClick : null} id="btn">
+              {enable === false ? (<Tooltip title="Fill all the Fields"><span><button className="writeSubmit21" onClick={this.handleClick} disabled={true} >
                 Publish
-              </button>
+              </button></span></Tooltip> ) : (
+              <button className="writeSubmit2" onClick={this.handleClick} >
+                Publish
+              </button>)}
             </Toolbar>
           </AppBar>
           <div className="write">
             <form className="writeForm">
-                <div className="writeFormGroup">
-                <input
-                  className="writeInput1"
-                  placeholder="Title..."
-                  type="text"
-                  id="title"
-                  name="title"
-                  minlength="10"
-                  // onKeyUp={this.handleEmpty}
-                  onChange={this.handleTextChange}
-                  required
-                />
-                <select className="category" id="category" name="categories" onChange={this.handleTextChange} required>
-                  <option value="">Select Category</option>
-                  <option value="Technology">Technology</option>
-                  <option value="Business">Business</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Sports">Sports</option>
-                  <option value="Science">Science</option>
-                  <option value="Health">Health</option>
-                </select><br/>
-              </div>
-              <div className="Error">
-              <p style={{marginLeft:80}}>{this.state.title.length > 10 ? "": "*Title must be atleast 10 characters long" }</p><p style={{marginRight:300}}>{this.state.categories == "" ?"*Required":""}</p>
-              </div>
               <div className="writeFormGroup">
                 <input
                   className="writeInput21"
@@ -129,47 +150,70 @@ class Create extends React.Component {
                   id="img"
                   name="img"
                   minlength="10"
-                  // onKeyUp={this.handleEmpty}
                   onChange={this.handleTextChange}
                   required
                 />
+                <img src={this.state.img} className="img-Preview" id="preview"/>
+              </div>
+          <div className="Error">
+            <p style={{ marginTop : -60 , marginLeft: 80 }}>{this.state.img == "" ? "*Required" : ""}</p>
+          </div>
+          <div className="writeFormGroup">
+                <input
+                  className="writeInput1"
+                  placeholder="Title..."
+                  type="text"
+                  id="title"
+                  name="title"
+                  minlength="10"
+                  onKeyUp={this.handleEmpty}
+                  onChange={this.handleTextChange}
+                  required
+                />
+                <select className="category" id="category" name="categories" onChange={this.handleTextChange} onKeyUp={this.handleEmpty} required>
+                  <option value="">Select Category</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Business">Business</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Science">Science</option>
+                  <option value="Health">Health</option>
+                </select><br />
               </div>
               <div className="Error">
-              <p style={{marginLeft:80}}>{this.state.img == "" ?"*Required":""}</p>
+                <p style={{ marginLeft: 80 }}>{this.state.title.length > 10 ? "" : "*Title must be atleast 10 characters long"}</p><p style={{ marginRight: 300 }}>{this.state.categories == "" ? "*Required" : ""}</p>
               </div>
-              <div className="writeFormGroup">
-                <textarea
-                  className="writeInput2 writeText"
-                  placeholder="Tell your story..."
-                  type="text"
-                  id="desc"
-                  name="desc"
-                  // onKeyUp={this.handleEmpty}
-                  onChange={this.handleTextChange}
-                  required
-                />
-              </div>
-              <div className="Error1">
-                <p style={{marginLeft:80}}>{this.state.desc.length < 10 ?"*Desc must be atleast 10 character long":""}</p>
-                </div>
-            </form>
-            </div>
-        </Dialog>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleCloseOnly}
-          aria-describedby="alert-dialog-slide-description">
-          <DialogTitle>{"Do you want to cancel your create Post?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              If you cancel your create post, your post will not be saved.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose}>Disagree</Button>
-            <Button onClick={this.handleCloseOnly}>Agree</Button>
-          </DialogActions>
-        </Dialog>
+          <div className="writeFormGroup">
+            <textarea
+              className="writeInput2 writeText"
+              placeholder="Tell your story..."
+              type="text"
+              id="desc"
+              name="desc"
+              onChange={this.handleTextChange}
+              required
+            />
+          </div>
+          <div className="Error1">
+            <p style={{ marginLeft: 80 }}>{this.state.desc.length < 10 ? "*Desc must be atleast 10 character long" : ""}</p>
+          </div>
+        </form>
+        </div>
+        </Dialog >
+      <Dialog
+        open={this.state.open}
+        aria-describedby="alert-dialog-slide-description">
+        <DialogTitle>{"Do you want to cancel your create Post?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            If you cancel your create post, your post will not be saved.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose}>Disagree</Button>
+          <Button onClick={this.handleCloseOnly}>Agree</Button>
+        </DialogActions>
+      </Dialog>
       </>
     );
   }

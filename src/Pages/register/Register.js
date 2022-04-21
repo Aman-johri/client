@@ -1,5 +1,6 @@
 import "./register.css"
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/actions/postActions";
@@ -17,8 +18,20 @@ class Register extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.state);
+        // axios.post("http://localhost:5000/auth/register", this.state)
+        //     .then(response => {
+        //         console.log(response);
+        //         window.location.href = "/login";
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         this.setState({
+        //             error: true,
+        //         });
+        //     });
         this.props.registerUser(this.state);
-        console.log(this.props.registerError);
+        
     }
 
     render(){
@@ -32,7 +45,7 @@ class Register extends React.Component {
                 <input className="registerInput" type="text" placeholder="Enter your email..." onChange={(e) => this.setState({ ...this.state, email: e.target.value })} />
                 <label>Password</label>
                 <input className="registerInput" type="password" placeholder="Enter your password..." onChange={(e) => this.setState({ ...this.state, password: e.target.value })} />
-                <input className="registerButton" type="submit" value={this.props.loading ? "hello" : "Register"}/>
+                <input className="registerButton" type="submit" value="Register"/>
             </form>
             <Link to="/login">
                 <button className="registerLoginButton">Login</button>

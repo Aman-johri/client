@@ -36,7 +36,6 @@ describe("Testing", () => {
         jest.spyOn(instance, "handleClick");
         component.setState({ title: "Aman Johri", desc: "Hello, I am Aman Johri" });
         component.find(".writeSubmit2").simulate("click");
-        console.log("error",component.debug());
         expect(instance.handleClick).toHaveBeenCalledTimes(0);
       });
 
@@ -44,8 +43,6 @@ describe("Testing", () => {
       const component = shallow(
         <Create/>
       );
-      console.log(component.debug());
-      console.log(component.state());
       const instance = component.instance();
       jest.spyOn(instance, "handleClick");
       component.setState({ title: "Aman Johri", desc: "Hello, I am Aman Johri", categories:"life" });

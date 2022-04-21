@@ -19,9 +19,17 @@ export default class Home extends React.Component {
   }
 
   openDiologBox = () => {
+    console.log("hi1111");
     this.setState({
-      openDiolog: true
+      openDiolog: !this.state.openDiolog
     });
+  }
+  componentDidMount(){
+    //check if the token is present then redirect to dashboard else redirect to login
+    console.log("token",localStorage.getItem("token"));
+    if(localStorage.getItem("token") === null){
+      window.location.href = "/login";
+    }
   }
 
   render(){
@@ -31,11 +39,11 @@ export default class Home extends React.Component {
       <Header/>
       <div className="home">
         <Posts />
-        <Tooltip title="Create new Post" placement="bottom">
+        <Tooltip title="Create new Blog" placement="bottom">
         <button className="createPost fa fa-plus" onClick={this.openDiologBox}></button></Tooltip>
         <Sidebar/>
       </div>
-      <Create openDiolog={this.state.openDiolog} />
+      <Create openDiolog={this.state.openDiolog} onClose={this.openDiologBox} />
       </>
     );
   }

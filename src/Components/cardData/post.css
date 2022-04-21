@@ -1,5 +1,5 @@
 .post {
-  width: 385px;
+  width: 360px;
   margin: 0px 25px 25px 25px;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
 }
 
 .postImg {
-  width: 385px;
+  width: 360px;
   height: 280px;
   object-fit: cover;
 }
@@ -69,7 +69,8 @@
 }
 
 .singlePostIcon1{
-  margin-left: -15px;
+  margin-top: 7px;
+  margin-left: -20px;
   cursor: pointer;
   font-size: 25px;
 }
@@ -84,9 +85,10 @@
 }
 
 .singlePostIcon2{
+  margin-top: 5px;
   margin-left: 4px;
   cursor: pointer;
-  margin-right: -40px;
+  margin-right: -30px;
   font-size: 25px;
 }
 .singlePostIcon2:last-child{

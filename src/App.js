@@ -15,14 +15,13 @@ import Register from './Pages/register/Register';
 
 
 function App() {
-  const user = true;
   return (
     <Router>
       <Topbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/login">{user ? <Home/> : <Login/>}</Route>
-        <Route path="/register">{user ? <Home/> : <Register/>}</Route>
+        <Route exact path="/login">{<Login/>}</Route>
+        <Route path="/register">{<Register/>}</Route>
         {/* <Route path="/Home">{user ? <Home/> : <Login/>}</Route> */}
         <Route path="/Single/:postId" component={Single}/>
       </Switch>

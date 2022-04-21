@@ -1,5 +1,5 @@
 import React from 'react'
-import "./editPostInfo.css";
+import "./singleEditPostInfo.css";
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
@@ -65,7 +65,8 @@ class SinglePost extends React.Component {
           toast.success("Post updated successfully"));
       setTimeout(() => {
         window.location.href = "/";
-      },1000);
+      }, 1000);
+      
   }
 
   handleCloseOpen = () => {
