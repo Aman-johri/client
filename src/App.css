@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.login-navbar{
+  background: linear-gradient(
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+      );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: blue;
+}

@@ -82,8 +82,10 @@ class Create extends React.Component {
       title: this.state.title,
       desc: this.state.desc,
       categories: this.state.categories,
-      img: this.state.img
+      img: this.state.img,
+      userID : localStorage.getItem("userId")
     };
+    console.log(post);
     this.props.createData(post);
     setTimeout(() => {
       window.location.href = "/";

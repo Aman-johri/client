@@ -3,19 +3,22 @@ import "./posts.css"
 import { connect } from 'react-redux'
 import { fetchData } from '../../redux/actions/postActions'
 import CardPost from '../cardData/CardPost'
+import Create from "../../Pages/create/Create"
 
 class Posts extends React.Component {
 
   componentDidMount() {
-    this.props.onFetchData();
+    const id = localStorage.getItem('userId');
+    console.log(id);
+    this.props.onFetchData(id);
   }
 
   render() {
     return (
       <div className='posts'>
-        {this.props.isLoading ? this.props.data.map(post => (
+        {(this.props.data.length != 0) ? this.props.data.map(post => (
           <CardPost key={post._id} post={post} />
-        )) : <h2 className='error'>Sorry! unable to show blogs this time.<br />*This is due to network problem,Refresh this page again or check your internet connection*</h2>}
+        )) : <h2 className='error'>Sorry! No Blogs<br />*Create a new Blog and see all your blogs here*</h2>}
       </div>
     );
   }

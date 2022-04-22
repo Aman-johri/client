@@ -11,18 +11,21 @@ class Topbar extends React.Component {
 
     handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("user");
+        localStorage.removeItem("userName");
         window.location.href = "/login";
     };
     render(){
         return (
-            <div className="top">
+             <div className="top">
                 <div className="topLeft">
                     <i className="topIcon fa fa-facebook-square"></i>
                     <i className="topIcon fa fa-twitter-square"></i>
                     <i className="topIcon fa fa-pinterest-square"></i>
                 </div>
                 <div className="topCenter">
-                    <ul className="toplist">
+                   <ul className="toplist">
                         <li className="topListItem"><Link className="link" to="/">HOME</Link></li>
                         <li className="topListItem">ABOUT</li>
                         <li className="topListItem">CONTACT</li>
@@ -30,17 +33,8 @@ class Topbar extends React.Component {
                     </ul>
                 </div>
                 <div className="topRight">
-                    {
-                        this.state.user ? (
-                            <img src="https://www.w3schools.com/howto/img_avatar.png"  className="topImg" alt="avatar"/>  
-                        ) :(
-                            <ul className="toplist">
-                            <li className="topListItem"><Link className="link" to="/login">LOGIN</Link></li>
-                            <li className="topListItem"><Link className="link" to="/register">REGISTER</Link></li>
-                        </ul>
-                        )
-                    }
-                    <i className="topSearchIcon fa fa-search"></i>  
+                     <img src="https://www.w3schools.com/howto/img_avatar.png"  className="topImg" alt="avatar"/>  
+                     <i className="topSearchIcon fa fa-search"></i>  
                 </div>
             </div>
         );

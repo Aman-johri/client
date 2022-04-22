@@ -11,6 +11,7 @@ class Login extends React.Component {
       username: "",
       password: "",
       error: false,
+      
     };
   }
 
@@ -26,6 +27,9 @@ class Login extends React.Component {
       .then((response) => {
         console.log("abcd",response);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("userName", response.data.user.username);
         window.location.href = "/";
       })
       .catch((error) => {

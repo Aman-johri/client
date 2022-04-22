@@ -2,7 +2,8 @@ import axios from "axios"
 import { toast } from "react-toastify";
 export const fetchData = () => {
     return (dispatch) => {
-        axios.get('http://localhost:5000/posts')
+        const id = localStorage.getItem("userId");
+        axios.get(`http://localhost:5000/posts/${id}`)
             .then(response => {
                 console.log(response.data);
                 dispatch({
@@ -84,6 +85,7 @@ export const updateData = (postId,post) => {
     return (dispatch) => {
         axios.put('http://localhost:5000/posts/'+postId,post)
             .then(response => {
+                console.log("update" ,response.data);
                 toast.success("Post updated successfully");
                 dispatch({
                     type: "UPDATE",
@@ -155,7 +157,7 @@ export const registerUser = (state) => {
                 }, 1000);
             })
             .catch(error => {
-                toast.error("Unable to register user");
+                toast.error("you are required to fill the details correctly");
                 dispatch({
                     type: "CLOSE_LOADER",
                 });

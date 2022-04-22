@@ -60,9 +60,10 @@ class SinglePost extends React.Component {
         desc: this.state.desc,
         img: this.state.img
       };
-      axios.put('http://localhost:5000/posts/' + this.state.id, post)
-        .then(res => 
-          toast.success("Post updated successfully"));
+      // axios.put(`http://localhost:5000/posts/$(this.state.id)`, post)
+      //   .then(res => 
+      //     toast.success("Post updated successfully"));
+      this.props.updateData(this.state.id, post);
       setTimeout(() => {
         window.location.href = "/";
       },1000);
@@ -120,6 +121,7 @@ class SinglePost extends React.Component {
     this.handleClick();
   }
   render() {
+    const username = localStorage.getItem("userName");
     const { title, desc, createdAt, _id } = this.state;
     const enable = (title===this.props.post.title && desc === this.props.post.desc && this.state.img === this.props.post.img) || (this.state.title == "" || this.state.desc == "" || this.state.img == "");
     console.log(enable);
@@ -160,7 +162,7 @@ class SinglePost extends React.Component {
                 </h1>
               }
               <div className='singlePostInfo'>
-                <span className='singlePostAuthor'>Author: <b>Aman</b></span>
+                <span className='singlePostAuthor'>Author: <b>{username}</b></span>
                 <span className='singlePostDate'>{new Date(this.props.post.createdAt).toDateString()}</span>
               </div>
               {

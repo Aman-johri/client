@@ -17,9 +17,12 @@ import Register from './Pages/register/Register';
 function App() {
   return (
     <Router>
-      <Topbar />
+      {localStorage.getItem("token") == null ?
+      (
+        <h2 className="login-navbar">BLOG APPLICATION</h2>
+      ) : <Topbar /> } 
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/">{localStorage.getItem("token") == null ? <Login/> : <Home/>}</Route>
         <Route exact path="/login">{<Login/>}</Route>
         <Route path="/register">{<Register/>}</Route>
         {/* <Route path="/Home">{user ? <Home/> : <Login/>}</Route> */}

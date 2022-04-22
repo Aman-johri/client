@@ -102,6 +102,7 @@ class SinglePost extends React.Component {
 
   render() {
     const {title, desc, createdAt, _id} = this.props.post;
+    const username = localStorage.getItem("userName");
     return (
       <>
         <Dialog open={this.props.open} fullScreen>
@@ -139,7 +140,7 @@ class SinglePost extends React.Component {
                 </h1>
               }
               <div className='singlePostInfo'>
-                <span className='singlePostAuthor'>Author: <b>Aman</b></span>
+                <span className='singlePostAuthor'>Author: <b>{username}</b></span>
                 <span className='singlePostDate'>{new Date(createdAt).toDateString()}</span>
               </div>
               {
