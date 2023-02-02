@@ -1,15 +1,13 @@
 .posts{
-    flex: 9;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
+    padding: 20px;
     height: 40%;
 }
 .error{
      text-align: center;
      justify-items: center;
      align-items: center;
-     margin-top: 140px;
-     margin-left: 80px;
      height: 155px;
+     margin-top: 20%;
 }
